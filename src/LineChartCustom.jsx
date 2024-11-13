@@ -1,8 +1,6 @@
-import React from 'react';
+import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    LineChart,
-    Line,
     XAxis,
     YAxis,
     ResponsiveContainer,
@@ -12,22 +10,102 @@ import {
 } from 'recharts';
 import { Tooltip } from 'chart.js';
 
-const PerformanceChart = ({ title, subHeading, bottomJsx }) => {
-    // Data points matching the image exactly
-    const data = [
-        { name: 'Sem 1', value: 60 },
-        { name: 'Sem 2', value: 65 },
-        { name: 'Sem 3', value: 55 },
-        { name: 'Sem 4', value: 75 },
-        { name: 'Sem 5', value: 78 },
-        { name: 'Sem 6', value: 85 }
-    ];
+const PerformanceChart = ({ performanceSemester, setPerformanceSemester, bottomJsx, branch, course }) => {
+
+    const semesterPerformanceData = {
+        btech: {
+            cse: {
+                data: [
+                    { name: 'Sem 1', value: 75 },
+                    { name: 'Sem 2', value: 82 },
+                    { name: 'Sem 3', value: 78 },
+                    { name: 'Sem 4', value: 85 },
+                    { name: 'Sem 5', value: 88 },
+                    { name: 'Sem 6', value: 92 }
+                ],
+            },
+            mechanical: {
+                data: [
+                    { name: 'Sem 1', value: 70 },
+                    { name: 'Sem 2', value: 73 },
+                    { name: 'Sem 3', value: 68 },
+                    { name: 'Sem 4', value: 77 },
+                    { name: 'Sem 5', value: 82 },
+                    { name: 'Sem 6', value: 80 }
+                ],
+            }
+        },
+        mtech: {
+            cse: {
+                data: [
+                    { name: 'Sem 1', value: 85 },
+                    { name: 'Sem 2', value: 88 },
+                    { name: 'Sem 3', value: 92 },
+                    { name: 'Sem 4', value: 90 },
+                    { name: 'Sem 5', value: 95 },
+                    { name: 'Sem 6', value: 94 }
+                ],
+            },
+            mechanical: {
+                data: [
+                    { name: 'Sem 1', value: 80 },
+                    { name: 'Sem 2', value: 83 },
+                    { name: 'Sem 3', value: 85 },
+                    { name: 'Sem 4', value: 82 },
+                    { name: 'Sem 5', value: 88 },
+                    { name: 'Sem 6', value: 87 }
+                ],
+            }
+        }
+    };
+
+    const getLimitedSemesterData = () => {
+        const currentSem = parseInt(performanceSemester.replace('sem', ''));
+
+        const branchData = semesterPerformanceData[course][branch];
+
+        const limitedData = {
+            ...branchData,
+            data: branchData.data.filter((item) => {
+                const semNumber = parseInt(item.name.replace('Sem ', ''));
+                return semNumber <= currentSem;
+            }),
+        };
+
+        return limitedData;
+    };
 
     return (
         <>
             <Card className=" shadow-none border-0 rounded-none col-span-2">
                 <CardHeader className="space-y-0 px-4 pt-4 pb-2">
-                    <CardTitle className="text-content-green-dark text-lg mb-0.5">{"Student Performance"}</CardTitle>
+                    <CardTitle className="flex justify-between text-content-green-dark text-lg mb-0.5">
+                        <p>
+                            {"Student Performance"}
+                        </p>
+                        <Select
+                            value={performanceSemester}
+                            onValueChange={(value) => setPerformanceSemester(value)}
+                        >
+                            <SelectTrigger className="w-[150px] bg-inherit border-gray-300">
+                                <SelectValue>
+                                    {performanceSemester === "sem1" ? "Semester 1" :
+                                        performanceSemester === "sem2" ? "Semester 2" :
+                                            performanceSemester === "sem3" ? "Semester 3" :
+                                                performanceSemester === "sem4" ? "Semester 4" :
+                                                    performanceSemester === "sem5" ? "Semester 5" :
+                                                        "Semester 6"}
+                                </SelectValue>
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="sem1">Semester 1</SelectItem>
+                                <SelectItem value="sem2">Semester 2</SelectItem>
+                                <SelectItem value="sem3">Semester 3</SelectItem>
+                                <SelectItem value="sem4">Semester 4</SelectItem>
+                                <SelectItem value="sem5">Semester 5</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </CardTitle>
                     <div className="flex gap-4 text-xs text-gray-400 font-semibold">
                         <span>Average Score: 255</span>
                         &#9679;
@@ -44,7 +122,7 @@ const PerformanceChart = ({ title, subHeading, bottomJsx }) => {
                                 <AreaChart
                                     width={600}
                                     height={250}
-                                    data={data}
+                                    data={getLimitedSemesterData().data}
                                     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                                 >
                                     <defs>

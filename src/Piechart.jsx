@@ -2,9 +2,11 @@ import React from 'react';
 import { PieChart, Pie, Cell, Label, Tooltip } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const PiechartCustom = ({ data, title, subHeading, bottomJsx }) => {
+const PiechartCustom = ({ data:newData, title, subHeading,status, bottomJsx ,branch,course, semester}) => {
 
-    const total = data.reduce((sum, entry) => sum + entry.value, 0);
+    console.log("course,branch,semester", course,branch,semester);
+    const data = newData[course][branch][semester].data;
+    console.log("data", data);
 
     return (
 
@@ -55,7 +57,7 @@ const PiechartCustom = ({ data, title, subHeading, bottomJsx }) => {
                                                 dominantBaseline="central"
                                                 className="font-medium text-xl"
                                             >
-                                                Fair
+                                                {status}
                                             </text>
                                             <text
                                                 x={cx}
