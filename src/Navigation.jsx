@@ -3,16 +3,28 @@ import { Search, Bell, Settings, User, } from 'lucide-react';
 const Navigation = () => {
     return (
         <nav className="">
-            <div className="flex items-center justify-between p-4 border-b border-gray-300 ">
+            <div className="flex items-center justify-between p-4 border-b border-gray-300 w-full overflow-x-auto ">
                 <div className="flex items-center gap-1 ">
                     <span className="text-base text-gray-400 font-semibold">Welcome,</span>
                     <span className="text-base text-content-green-dark font-semibold">Uma Nandini</span>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Search className="w-5 h-5 text-gray-500" />
-                    <Bell className="w-5 h-5 text-gray-500" />
-                    <Settings className="w-5 h-5 text-gray-500" />
-                    <User className="w-5 h-5 text-gray-500" />
+                    <div className="relative">
+                        <Search className="w-4 h-4 absolute text-primary-bg-green left-3 top-1/2 transform -translate-y-1/2 " />
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className="pl-9 pr-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-indigo-700"
+                        />
+                    </div>
+                    <Bell className="w-8 h-8 text-gray-500 p-2 bg-white rounded-full" />
+                    <Settings className="w-8 h-8 text-gray-500 p-2 bg-white rounded-full" />
+
+                    <img
+                        src={"/avatar.png"}
+                        alt={"avatarImage"}
+                        className="w-8 h-8 rounded-full"
+                    />
                 </div>
             </div>
 

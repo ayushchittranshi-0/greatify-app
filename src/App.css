@@ -2,3 +2,29 @@
 #greatify-image {
 filter: brightness(0) saturate(100%) invert(19%) sepia(12%) saturate(3901%) hue-rotate(138deg) brightness(92%) contrast(106%);
 }
+
+/* For Webkit browsers (Chrome, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;  /* for vertical scrollbar */
+  height: 6px; /* for horizontal scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 100vh;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #10b981;  /* emerald-500 */
+  border-radius: 100vh;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #059669;  /* emerald-600 */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 #f1f1f1;
+}

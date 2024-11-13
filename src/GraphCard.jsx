@@ -47,7 +47,7 @@ const GraphCard = () => {
                 </div>
 
 
-                <div className="grid grid-cols-7 bg-white divide-x divide-gray-300">
+                <div className="grid lg:grid-cols-7 md:grid-cols-4 grid-cols-1 bg-white divide-x divide-y divide-gray-300">
                     {/* Attendance Card */}
                     <PiechartCustom title="Student Attendance" data={attendanceData} subHeading="Total students: 17260"
                         bottomJsx={
