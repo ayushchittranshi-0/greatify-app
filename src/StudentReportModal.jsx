@@ -8,48 +8,19 @@ import {
 } from "@/components/ui/dialog";
 import Tabs from './Tabs';
 
-const StudentReportModal = ({ isOpen, onClose, student }) => {
-    // Sample data (replace with actual data from props)
-    const studentData = {
-        name: "Raj Kumar",
-        image: "/api/placeholder/64/64",
-        affiliationNo: "1005",
-        studentId: "STU000012",
-        batch: "2017",
-        degree: "B.Tech",
-        course: "CSE",
-        sem: "2nd sem",
-        attendance: "6/4",
-        rank: "30TH",
-        progress: "5%",
-        riskAlert: "Medium",
-        subjectPerformance: [
-            { name: "Math", score: 85 },
-            { name: "Math", score: 85 },
-            { name: "Math", score: 85 },
-            { name: "Math", score: 85 },
-            { name: "Math", score: 85 },
-            { name: "Math", score: 85 },
-            { name: "Math", score: 85 },
-            { name: "AI", score: 75 },
-            { name: "Prog lang", score: 80 },
-            { name: "Com Arch", score: 70 },
-            { name: "Algo", score: 90 },
-            { name: "Math", score: 85 },
-            { name: "AI", score: 75 },
-            { name: "Prog lang", score: 80 },
-            { name: "Com Arch", score: 70 },
-            { name: "Algo", score: 90 }
-        ],
-        skills: [
-            "Problem solving",
-            "Time Management",
-            "Emotional Intelligence",
-            "Collaboration",
-            "Adaptability",
-            "Research Skills"
-        ]
-    };
+const StudentReportModal = ({ isOpen, onClose, studentData }) => {
+    if (!studentData) {
+        return null;
+    }
+     
+    const [tabValue, setTabValue] = React.useState('Sem 1');
+
+    React.useEffect(() => {
+        if (isOpen) {
+            setTabValue('Sem 1');
+        }
+    }, [isOpen]);
+
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
@@ -64,20 +35,19 @@ const StudentReportModal = ({ isOpen, onClose, student }) => {
                                 className="w-16 h-16 rounded-full"
                             />
 
-                            <div className={`flex items-center gap-2
-${studentData.riskAlert === 'Low'
+                            <div className={`flex items-center gap-2 ${studentData.riskAlert === 'Low'
                                     ? 'text-green-800'
-                                    : 'text-purple-800'}
-` }>
+                                    : studentData.riskAlert === 'Medium'
+                                        ? 'text-purple-800'
+                                        : 'text-red-800'
+                                }`}>
                                 RISK ALERT:
-                                <span className={`px-3 py-1 rounded-full text-sm 
-${studentData.riskAlert === 'Low'
+                                <span className={`px-3 py-1 rounded-full text-sm ${studentData.riskAlert === 'Low'
                                         ? 'bg-green-100 text-green-800'
-                                        : 'bg-purple-100 text-purple-800'}
-
-                `}
-
-                                >
+                                        : studentData.riskAlert === 'Medium'
+                                            ? 'bg-purple-100 text-purple-800'
+                                            : 'bg-red-100 text-red-800'
+                                    }`}>
                                     {studentData.riskAlert}
                                 </span>
                             </div>
@@ -99,19 +69,19 @@ ${studentData.riskAlert === 'Low'
                         {/* Student Details */}
                         <div className="grid grid-cols-4  divide-x divide-gray-200">
                             <div className="space-y-2 my-4 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">BATCH</div>
+                                <div className="text-xs text-gray-500 font-semibold">BATCH</div>
                                 <div className="font-medium text-primary-bg-green">{studentData.batch}</div>
                             </div>
                             <div className="space-y-2 my-4 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">DEGREE</div>
-                                <div className="font-medium text-primary-bg-green">{studentData.degree}</div>
-                            </div>
-                            <div className="space-y-2 my-4 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">COURSE</div>
+                                <div className="text-xs text-gray-500 font-semibold">DEGREE</div>
                                 <div className="font-medium text-primary-bg-green">{studentData.course}</div>
                             </div>
                             <div className="space-y-2 my-4 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">SEM</div>
+                                <div className="text-xs text-gray-500 font-semibold">COURSE</div>
+                                <div className="font-medium text-primary-bg-green">{studentData.branch}</div>
+                            </div>
+                            <div className="space-y-2 my-4 px-4">
+                                <div className="text-xs text-gray-500 font-semibold">SEM</div>
                                 <div className="font-medium text-primary-bg-green">{studentData.sem}</div>
                             </div>
                         </div>
@@ -119,15 +89,15 @@ ${studentData.riskAlert === 'Low'
                         {/* Performance Metrics */}
                         <div className="grid grid-cols-4 gap-6 divide divide-x divide-gray-200">
                             <div className="space-y-2 my-4 col-span-2 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">ATTENDANCE : PERFORMANCE</div>
+                                <div className="text-xs text-gray-500 font-semibold">ATTENDANCE : PERFORMANCE</div>
                                 <div className="font-medium text-primary-bg-green">{studentData.attendance}</div>
                             </div>
                             <div className="space-y-2 my-4 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">RANK</div>
+                                <div className="text-xs text-gray-500 font-semibold">RANK</div>
                                 <div className="font-medium text-primary-bg-green">{studentData.rank}</div>
                             </div>
                             <div className="space-y-2 my-4 px-4">
-                                <div className="text-sm text-gray-500 font-semibold">PROGRESS</div>
+                                <div className="text-xs text-gray-500 font-semibold">PROGRESS</div>
                                 <div className="font-medium text-primary-bg-green">↗ {studentData.progress}</div>
                             </div>
                         </div>
@@ -138,7 +108,7 @@ ${studentData.riskAlert === 'Low'
 
                 <div className="space-y-4">
                     <div className="flex items-center w-full ">
-                        <Tabs tabs={['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6']} initialTab={"Sem 1"} />
+                        <Tabs tabs={['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6']} tabValue={tabValue} setTabValue={setTabValue} />
                     </div>
                 </div>
 
@@ -160,7 +130,7 @@ pb-4
                             <tbody>
                                 {/* First row - Subject Names */}
                                 <tr>
-                                    {studentData.subjectPerformance.map((subject, index) => (
+                                    {studentData.subjectPerformance[tabValue].map((subject, index) => (
                                         <td
                                             key={index}
                                             className="text-center text-sm p-4 text-primary-bg-green text-nowrap 
@@ -171,15 +141,14 @@ pb-4
                                     ))}
                                 </tr>
 
-                                {/* Second row - Values */}
                                 <tr>
-                                    {studentData.subjectPerformance.map((subject, index) => (
+                                    {studentData.subjectPerformance[tabValue].map((subject, index) => (
                                         <td
                                             key={index}
                                             className="text-center text-sm p-4 text-gray-700 
                              border border-gray-200"
                                         >
-                                            00
+                                            {subject.score}
                                         </td>
                                     ))}
                                 </tr>
@@ -188,12 +157,12 @@ pb-4
                     </div>
                 </div>
 
-                <div className="mt-6">
+                <div className="mt-6 mb-8">
                     <h3 className="text-sm font-semibold text-primary-bg-green mb-4 w-full overflow-hidden">Skills Developed</h3>
-                    <div className="grid grid-cols-3 gap-4 text-xs font-semibold text-primary-bg-green">
+                    <div className="grid grid-cols-3 gap-4 text-xs font-semibold text-green-600">
                         {studentData.skills.map((skill, index) => (
                             <div key={index} className="flex items-center gap-2">
-                                <CheckCircle2 className="w-5 h-5 text-primary-bg-green" />
+                                <CheckCircle2 className="w-5 h-5 text-green-600" />
                                 <span>{skill}</span>
                             </div>
                         ))}

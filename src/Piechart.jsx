@@ -9,7 +9,6 @@ const PiechartCustom = ({ data:newData, title, subHeading,status, bottomJsx ,bra
     console.log("data", data);
 
     return (
-
         <Card className=" shadow-none border-0 rounded-none col-span-2">
             <CardHeader className="border-b border-gray-200 space-y-0 px-4 pt-4 pb-2">
                 <CardTitle className="text-content-green-dark text-lg mb-0.5">{title}</CardTitle>
