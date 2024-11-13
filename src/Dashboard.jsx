@@ -39,7 +39,6 @@ const Dashboard = () => {
       <nav className="bg-white border-b">
         <div className="flex items-center justify-between px-4 py-2">
           <div className="flex items-center gap-4">
-            <img src="/api/placeholder/40/40" alt="Amity University" className="h-10" />
             <span className="text-xl">Welcome, Uma Nandini</span>
           </div>
           <div className="flex items-center gap-4">
