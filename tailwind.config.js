@@ -13,6 +13,7 @@ export default {
                 "primary-bg-green" : "#00373a",
                 "content-bg-green" : "#739193",
                 "content-bg-green-active" : "#d7ddd0",
+                "content-green-dark" : "#03585c",
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 card: {

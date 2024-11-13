@@ -97,61 +97,67 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className= "h-screen py-4 fixed flex">
+        <div className="h-screen py-4 fixed flex">
             <div
-            className={cn(
-                "flex flex-col flex-1 transition-all duration-300 bg-primary-bg-green rounded-[0.75rem] w-[200px]",
-                expanded ? "w-[200px]" : "w-16"
-            )}
-        >
-            {/* Logo */}
-            <div className={cn(
-                "flex items-center gap-2 p-4 border-b bg-[#f9f7e8] m-[0.305rem] rounded-[calc(0.75rem-0.305rem)] ",
-                expanded ? "justify-start" : "justify-center"
-            )}>
-                {expanded && (
-                    <span className="font-semibold text-primary-bg-green text-xs">Amity University</span>
+                className={cn(
+                    "flex flex-col flex-1 transition-all duration-300 bg-primary-bg-green rounded-[0.75rem] w-[200px]",
+                    expanded ? "w-[200px]" : "w-16"
                 )}
-            </div>
+            >
+                {/* Logo */}
+                <div className={cn(
+                    "flex items-center pl-2 pr-4 py-4 border-b bg-[#f9f7e8] m-[0.305rem] rounded-[calc(0.75rem-0.305rem)] ",
+                    expanded ? "justify-start" : "justify-center"
+                )}>
+                    <img
+                        src="/logo.svg"
+                        alt="Logo"
+                        className="h-12 w-12"
+                    />
 
-            {/* Menu Items */}
-            <nav className="flex-1 overflow-y-auto p-2">
-                {menuItems.map((item, index) => (
-                    <MenuItem
-                        key={index}
-                        icon={item.icon}
-                        label={item.label}
-                        hasSubMenu={item.hasSubMenu}
-                        subItems={item.subItems}
-                        active={activeItem === item.label}
-                        expanded={expanded}
-                        onClick={() => setActiveItem(item.label)}
-                    />
-                ))}
-            </nav>
+                    {expanded && (
+                        <span className="font-semibold text-content-green-dark text-xs">Amity University</span>
+                    )}
+                </div>
 
-            {/* Decorative Element */}
-            <div className="absolute bottom-0 left-0 w-full">
-                <svg
-                    className="text-green-500 w-full h-24"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                >
-                    <path
-                        d="M0,0 Q50,100 100,0 L100,100 L0,100 Z"
-                        fill="currentColor"
-                        fillOpacity="0.1"
-                    />
-                    <circle
-                        cx="80"
-                        cy="50"
-                        r="10"
-                        fill="currentColor"
-                        fillOpacity="0.1"
-                    />
-                </svg>
-            </div>
-        </div></div>
+                {/* Menu Items */}
+                <nav className="flex-1 overflow-y-auto p-2">
+                    {menuItems.map((item, index) => (
+                        <MenuItem
+                            key={index}
+                            icon={item.icon}
+                            label={item.label}
+                            hasSubMenu={item.hasSubMenu}
+                            subItems={item.subItems}
+                            active={activeItem === item.label}
+                            expanded={expanded}
+                            onClick={() => setActiveItem(item.label)}
+                        />
+                    ))}
+                </nav>
+
+                {/* Decorative Element */}
+                <div className="absolute bottom-0 left-0 w-full">
+                    <svg
+                        className="text-green-500 w-full h-24"
+                        viewBox="0 0 100 100"
+                        preserveAspectRatio="none"
+                    >
+                        <path
+                            d="M0,0 Q50,100 100,0 L100,100 L0,100 Z"
+                            fill="currentColor"
+                            fillOpacity="0.1"
+                        />
+                        <circle
+                            cx="80"
+                            cy="50"
+                            r="10"
+                            fill="currentColor"
+                            fillOpacity="0.1"
+                        />
+                    </svg>
+                </div>
+            </div></div>
     );
 };
 

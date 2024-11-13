@@ -1,0 +1,4 @@
+
+#greatify-image {
+filter: brightness(0) saturate(100%) invert(19%) sepia(12%) saturate(3901%) hue-rotate(138deg) brightness(92%) contrast(106%);
+}
