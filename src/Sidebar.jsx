@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, BookOpen, PenSquare, BarChart2, MonitorPlay, FileText, Users, ChevronDown } from 'lucide-react';
+import { LayoutDashboard, BookOpen, PenSquare, BarChart2, MonitorPlay, FileText, Users, ChevronDown, ChevronLeft } from 'lucide-react';
 import { cn } from "@/lib/utils";
+import {
+    LayoutGrid,
+    PenLine,
+    Crosshair,
+    UserSearch,
+    ClipboardList,
+    ChevronRight
+} from 'lucide-react';
 
 const MenuItem = ({ icon: Icon, label, active, expanded, hasSubMenu, subItems, onClick }) => {
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
@@ -55,49 +63,50 @@ const MenuItem = ({ icon: Icon, label, active, expanded, hasSubMenu, subItems, o
     );
 };
 
-const Sidebar = () => {
-    const [expanded, setExpanded] = useState(true);
-    const [activeItem, setActiveItem] = useState('Dashboard');
+const Sidebar = ({expanded,setExpanded}) => {
+    const [activeItem, setActiveItem] = useState('Report Analysis');
 
     const menuItems = [
         {
-            icon: LayoutDashboard,
+            icon: LayoutGrid,
             label: 'Dashboard',
-        },
-        {
-            icon: BookOpen,
-            label: 'Exam',
-            hasSubMenu: true,
-            subItems: ['Create Exam', 'View Exams', 'Results']
-        },
-        {
-            icon: PenSquare,
-            label: 'Authoring',
-            hasSubMenu: true,
-            subItems: ['Create Content', 'My Content', 'Shared Content']
-        },
-        {
-            icon: BarChart2,
-            label: 'Evaluation',
-            hasSubMenu: true,
-            subItems: ['Pending', 'Completed', 'Statistics']
-        },
-        {
-            icon: MonitorPlay,
-            label: 'Exam Monitoring',
+            path: '/dashboard'
         },
         {
             icon: FileText,
+            label: 'Exam',
+            path: '/exam'
+        },
+        {
+            icon: PenLine,
+            label: 'Authoring',
+            path: '/authoring'
+        },
+        {
+            icon: Crosshair,
+            label: 'Evaluation',
+            path: '/evaluation'
+        },
+        {
+            icon: UserSearch,
+            label: 'Exam Monitoring',
+            path: '/monitoring'
+        },
+        {
+            icon: ClipboardList,
             label: 'Report Analysis',
+            path: '/reports'
         },
         {
             icon: Users,
             label: 'Student List',
-        },
+            path: '/students'
+        }
     ];
 
     return (
         <div className="h-screen py-4 fixed flex">
+
             <div
                 className={cn(
                     "flex flex-col flex-1 transition-all duration-300 bg-primary-bg-green rounded-[0.75rem] w-[200px]",
@@ -106,9 +115,17 @@ const Sidebar = () => {
             >
                 {/* Logo */}
                 <div className={cn(
-                    "flex items-center pl-2 pr-4 py-4 border-b bg-[#f9f7e8] m-[0.305rem] rounded-[calc(0.75rem-0.305rem)] ",
-                    expanded ? "justify-start" : "justify-center"
+                    "flex relative items-center  py-2 border-b bg-[#f9f7e8] m-[0.305rem] rounded-[calc(0.75rem-0.305rem)] ",
+                    expanded ? "justify-start pl-2 pr-4 py-2" : "justify-center"
                 )}>
+
+
+                {expanded &&
+                    <ChevronLeft onClick={() => setExpanded(!expanded)} className="w-7 h-7 text-primary-bg-green bg-green-500 p-2 cursor-pointer absolute right-0 top-4 transform translate-x-1/2 rounded-full" />
+                }
+                {!expanded &&
+                    <ChevronRight onClick={() => setExpanded(!expanded)} className="w-7 h-7 text-primary-bg-green bg-green-500 p-2 cursor-pointer absolute right-0 top-4 transform translate-x-1/2 rounded-full" />
+                }
                     <img
                         src="/logo.svg"
                         alt="Logo"
@@ -121,7 +138,7 @@ const Sidebar = () => {
                 </div>
 
                 {/* Menu Items */}
-                <nav className="flex-1 overflow-y-auto p-2">
+                <nav className="flex-1 overflow-y-auto p-2 gap-4 flex flex-col">
                     {menuItems.map((item, index) => (
                         <MenuItem
                             key={index}

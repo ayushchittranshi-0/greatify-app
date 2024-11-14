@@ -9,7 +9,7 @@ const Navigation = () => {
                     <span className="text-base text-content-green-dark font-semibold">Uma Nandini</span>
                 </div>
                 <div className="flex items-center gap-4">
-                    <div className="relative">
+                    <div className="relative lg:block hidden">
                         <Search className="w-4 h-4 absolute text-primary-bg-green left-3 top-1/2 transform -translate-y-1/2 " />
                         <input
                             type="text"
@@ -17,6 +17,7 @@ const Navigation = () => {
                             className="pl-9 pr-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-indigo-700"
                         />
                     </div>
+                    <Search className="lg:hidden w-8 h-8 text-gray-500 p-2 bg-white rounded-full" />
                     <Bell className="w-8 h-8 text-gray-500 p-2 bg-white rounded-full" />
                     <Settings className="w-8 h-8 text-gray-500 p-2 bg-white rounded-full" />
 
@@ -29,7 +30,15 @@ const Navigation = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex text-xs font-semibold border-b border-gray-300 overflow-x-auto text-nowrap">
+            <div className={`flex text-xs font-semibold border-b border-gray-300 overflow-x-auto text-nowrap
+thin-scrollbar
+            [&::-webkit-scrollbar]:h-1.5
+            [&::-webkit-scrollbar-track]:bg-gray-100
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-track]:rounded-full
+            scrollbar-thin
+            scrollbar-track-gray-100
+` }>
                 <span className="p-4 text-content-green-dark border-b-2 border-orange-500 pb-2">Student</span>
                 <span className="p-4 text-gray-400">Behaviour and Discipline</span>
                 <span className="p-4 text-gray-400">Curriculum</span>

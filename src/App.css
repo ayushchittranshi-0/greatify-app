@@ -28,3 +28,26 @@ filter: brightness(0) saturate(100%) invert(19%) sepia(12%) saturate(3901%) hue-
   scrollbar-width: thin;
   scrollbar-color: #10b981 #f1f1f1;
 }
+
+
+/* For Webkit browsers (Chrome, Safari) */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;  /* for vertical scrollbar */
+  height: 6px; /* for horizontal scrollbar */
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 100vh;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+}
+
+/* For Firefox */
+.thin-scrollbar {
+  scrollbar-width: thin;
+}

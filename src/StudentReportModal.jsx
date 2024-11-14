@@ -53,8 +53,8 @@ const StudentReportModal = ({ isOpen, onClose, studentData }) => {
                             </div>
                         </div>
 
-                        <div>
-                            <h2 className="text-2xl font-semibold">{studentData.name}</h2>
+                        <div className='pb-2'>
+                            <h2 className="text-2xl mb-4 font-semibold">{studentData.name}</h2>
                             <div className="flex gap-2 mt-1 text-xs font-medium">
                                 <span className="px-3 py-1 bg-yellow-50 border border-yellow-700 text-yellow-700 rounded-full text-xs">
                                     Affiliation No.: {studentData.affiliationNo}

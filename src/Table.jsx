@@ -44,7 +44,16 @@ const StudentTable = () => {
         <>
             <div className="border border-gray-300 rounded-md">
                 {/* Table Header */}
-                <div className="p-4 flex items-center justify-between border-b pt-8 w-full overflow-x-auto">
+                <div className={ `p-4 flex items-center justify-between border-b pt-8 w-full overflow-x-auto
+
+thin-scrollbar
+            [&::-webkit-scrollbar]:h-1.5
+            [&::-webkit-scrollbar-track]:bg-gray-100
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-track]:rounded-full
+            scrollbar-thin
+            scrollbar-track-gray-100
+` }>
                     <span className="text-sm text-gray-500">3 results found</span>
                     <div className="flex items-center gap-4">
                         <div className="relative">
@@ -79,7 +88,7 @@ const StudentTable = () => {
                 </div>
 
                 {/* Table */}
-                <div className="bg-primary-bg-green overflow-x-auto mt-4 mx-4 rounded-md">
+                <div className={ `bg-primary-bg-green overflow-x-auto mt-4 mx-4 rounded-md` }>
                     <Table>
                         <TableHeader>
                             <TableRow className="text-xs bg-inherit hover:bg-inherit">
